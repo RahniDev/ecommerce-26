@@ -1,0 +1,125 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Shop from './core/Shop';
+import Signup from "./user/Signup";
+import Signin from "./user/Signin";
+import PrivateRoute from "./auth/PrivateRoute";
+import Dashboard from "./user/UserDashboard";
+import AdminRoute from "./auth/AdminRoute";
+import AdminDashboard from "./user/AdminDashboard";
+import AddCategory from "./admin/AddCategory";
+import AddProduct from "./admin/AddProduct";
+import Product from "./core/Product";
+import Category from "./core/Category";
+import Cart from "./core/Cart";
+import Orders from './admin/Orders';
+import Profile from "./user/Profile";
+import ManageProducts from './admin/ManageProducts';
+import UpdateProduct from './admin/UpdateProduct'
+import ForgotPassword from "./user/ForgotPassword";
+import Contact from "./core/Contact";
+import ShippingReturns from "./core/ShippingReturns";
+import PrivacyPolicy from "./core/PrivacyPolicy";
+import ResetPassword from "./user/ResetPassword";
+import Home from "./core/Home";
+
+const AppRoutes: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/collect" element={<Shop />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/product/:productId" element={<Product />} />
+        <Route path="/collection/:categoryId" element={<Category />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/shipping-returns" element={<ShippingReturns />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        {/* Private Routes */}
+        <Route
+          path="/user/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile/:userId"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Admin Routes */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/create/category"
+          element={
+            <AdminRoute>
+              <AddCategory />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/add/painting"
+          element={
+            <AdminRoute>
+              <AddProduct />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/orders"
+          element={
+            <AdminRoute>
+              <Orders />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/products"
+          element={
+            <AdminRoute>
+              <ManageProducts />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/product/update/:productId"
+          element={
+            <AdminRoute>
+              <UpdateProduct />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/forgot-password"
+          element={
+            <ForgotPassword />
+          }
+        />
+        <Route
+          path="/resetPassword/:token"
+          element={
+            <ResetPassword />
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default AppRoutes;

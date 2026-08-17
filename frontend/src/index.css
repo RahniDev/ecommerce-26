@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+}
+
+#logo {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.4rem;
+  font-weight: 400;
+  text-decoration: none;
+  color: #111;
+  letter-spacing: 0.05em;
+}
+
+#hero {
+  background-image: url('./assets/hero-bg.jpg');
+  height: 500px;
+  background-size: cover;
+  background-position: center center;
+}
+
+.swiper-prev,
+.swiper-next {
+  color: #111 !important;
+}
+
+.swiper-prev svg,
+.swiper-next svg {
+ font-size: 64px;
+}
+
