@@ -14,11 +14,11 @@ const PrivacyPolicy = () => {
       <Typography variant="body1">{t("privacy_policy_payment")}</Typography>
       <Typography variant="body1">{t("privacy_policy_use")}</Typography>
       <Typography variant="body1">{t("privacy_policy_sharing")}</Typography>
-      <Typography variant="body1">{t("privacy_policy_newsletter")}</Typography>
       <Typography variant="body1">{t("privacy_policy_data")}</Typography>
       <Typography variant="body1">{t("privacy_policy_rights")}</Typography>
       <Typography variant="body1">{t("privacy_policy_cookies")}</Typography>
       <Typography variant="body1">{t("privacy_policy_security")}</Typography>
+      <Typography variant="body1">{t("privacy_policy_contact")}</Typography>
     </Box>
     </Layout>
   )
