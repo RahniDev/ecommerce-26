@@ -4,7 +4,6 @@ import { Box, Grid, Typography, Link, Divider, IconButton } from "@mui/material"
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { getCategories } from "./apiCore";
 import type { Category } from "../types";
-import Newsletter from "../user/Newsletter";
 
 const Footer: React.FC = () => {
     const [categories, setCategories] = useState<Category[]>([]);
@@ -23,10 +22,10 @@ const Footer: React.FC = () => {
         <Box component="footer" sx={{ bgcolor: "#f5f5f5", mt: 4, p: 4 }}>
             <Grid container spacing={4} alignItems="flex-start">
 
-                {/* Newsletter */}
+                {/* Newsletter
                 <Grid size={{ xs: 12, md: 6 }}>
                     <Newsletter />
-                </Grid>
+                </Grid> */}
 
                 {/* Shop */}
                 <Grid size={{ xs: 4, md: 2 }}>
@@ -55,18 +54,15 @@ const Footer: React.FC = () => {
 
                 {/* Social */}
                 <Grid size={{ xs: 4, md: 2 }}>
-                    <IconButton component="a" href="https://instagram.com/sakari.artist" target="_blank" rel="noopener noreferrer" color="primary">
+                    <IconButton component="a" href="https://instagram.com/rahni.crafts" target="_blank" rel="noopener noreferrer" color="primary">
                         <InstagramIcon />
                     </IconButton>
-                     <Typography variant="body2" sx={{ mt: 1 }}>
-                        <strong>T.&nbsp;</strong>+33 1 23 45 67 89
-                    </Typography>
                 </Grid>
 
             </Grid>
             <Divider sx={{ my: 3 }} />
             <Typography variant="body2" color="textSecondary" align="center">
-                &copy; {new Date().getFullYear()} Sakari De-Meis. All rights reserved.
+                &copy; {new Date().getFullYear()} Rahni De-Meis. All rights reserved.
             </Typography>
         </Box>
     );
