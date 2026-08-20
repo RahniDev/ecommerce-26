@@ -74,7 +74,7 @@ const AppRoutes: React.FC = () => {
           }
         />
         <Route
-          path="/add/painting"
+          path="/add/product"
           element={
             <AdminRoute>
               <AddProduct />
