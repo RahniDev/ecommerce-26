@@ -2,6 +2,7 @@ import mongoose, { Schema, Document, Model, Types } from "mongoose";
 
 export interface ICategory extends Document {
   name: string;
+  slug: string;
   parent: Types.ObjectId | null;
   level: number;
 }
@@ -14,6 +15,13 @@ const CategorySchema: Schema<ICategory> = new Schema(
       required: true,
       maxlength: 32,
       unique: true,
+    },
+    slug: {
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
+      lowercase: true,
     },
     parent: {
       type: Schema.Types.ObjectId,

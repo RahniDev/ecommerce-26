@@ -175,6 +175,7 @@ export interface Category {
   subcategories: any;
   _id: string;
   name: string;
+  slug: string;
   level: number;
   parent?: string | Category | null;
 }

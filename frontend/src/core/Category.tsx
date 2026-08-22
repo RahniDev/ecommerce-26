@@ -9,15 +9,15 @@ import { getCategory } from "../admin/apiAdmin";
 import type { CategoryData } from "../types";
 
 const Category = () => {
-  const { categoryId } = useParams<{ categoryId: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const [category, setCategory] = useState<CategoryData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    if (categoryId) {
-      getCategory(categoryId)
+    if (slug) {
+      getCategory(slug)
         .then(data => {
           if (data.error) setError(data.error);
           else setCategory(data as unknown as CategoryData);
@@ -25,7 +25,7 @@ const Category = () => {
         .catch(() => setError("Failed to load category"))
         .finally(() => setLoading(false));
     }
-  }, [categoryId]);
+  }, [slug]);
 
   if (error) return <div>{error}</div>;
   if (loading) return <div>Loading...</div>;

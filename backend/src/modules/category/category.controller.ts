@@ -3,27 +3,34 @@ import { Category, ICategory } from '../category/category.model.js';
 import { Product } from '../product/product.model.js';
 import { applyLang } from '../product/product.controller.js'
 import { errorHandler, MongoError } from '../../helpers/errorHandler.js';
+import slugify from "slugify";
 
 interface CustomRequest extends Request {
   category?: ICategory;
 }
 
-export const categoryById = async (
-  req: CustomRequest,
-  res: Response,
-  next: NextFunction,
-  id: string
+export const categoryBySlug = async (
+    req: CustomRequest,
+    res: Response,
+    next: NextFunction,
+    slug: string
 ) => {
-  try {
-    const category = await Category.findById(id)
-    if (!category) {
-      return res.status(404).json({ error: 'Category does not exist' });
+    try {
+        const category = await Category.findOne({ slug });
+
+        if (!category) {
+            return res.status(404).json({
+                error: "Category does not exist",
+            });
+        }
+
+        req.category = category;
+        next();
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler(err as MongoError),
+        });
     }
-    req.category = category;
-    next();
-  } catch (err) {
-    return res.status(400).json({ error: errorHandler(err as MongoError) });
-  }
 };
 
 export const create = async (req: Request, res: Response) => {
@@ -50,12 +57,16 @@ export const create = async (req: Request, res: Response) => {
       }
     }
 
+    const slug = slugify(name, {
+      lower: true,
+      strict: true,
+    });
     const category = new Category({
       name,
+      slug,
       parent: parent || null,
       level,
     });
-
     const savedCategory = await category.save();
 
     res.status(201).json(savedCategory);

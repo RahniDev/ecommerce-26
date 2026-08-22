@@ -127,7 +127,7 @@ const Navbar: React.FC = () => {
             display: "inline-block",
           }}
         >
-          Shop Creations
+            <NavLink to="/shop" style={linkStyle}>Shop Creations</NavLink>
         </Box>
 
         {collectionsOpen && (

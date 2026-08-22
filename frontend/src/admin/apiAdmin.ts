@@ -79,9 +79,9 @@ export const createProduct = async (
     }
 };
 
-export const getCategory = async (categoryId: string): Promise<ApiResponse> => {
+export const getCategory = async (slug: string): Promise<ApiResponse> => {
     try {
-        const res = await fetch(`${API}/categories/${categoryId}`);
+        const res = await fetch(`${API}/categories/${slug}`);
         return await res.json();
     } catch (err) {
         console.error(err);

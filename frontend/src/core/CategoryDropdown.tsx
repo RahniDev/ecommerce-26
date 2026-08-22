@@ -25,8 +25,6 @@ const CategoryDropdown = ({
             "&:hover": {
               backgroundColor: "#f5f5f5",
             },
-
-            // important: descendant, not direct child
             "&:hover .children": {
               display: "block",
             },
@@ -34,7 +32,7 @@ const CategoryDropdown = ({
         >
           <Box
             onClick={() =>
-              navigate(`/collection/${category._id}`)
+              navigate(`/shop/${category.slug}`)
             }
             sx={{
               display: "flex",

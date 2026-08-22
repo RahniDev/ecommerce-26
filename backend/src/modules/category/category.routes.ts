@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { requireSignin, isAuth, isAdmin } from '../auth/auth.controller.js';
 import {
   create,
-  categoryById,
+  categoryBySlug,
   getCategory,
   getFeaturedCategory,
   update,
@@ -15,7 +15,7 @@ const router = Router();
 
 // Public routes
 router.get('/categories/featured', getFeaturedCategory)
-router.get('/categories/:categoryId', getCategory);
+router.get('/categories/:slug', getCategory);
 router.get('/categories', list);
 
 // Admin routes
@@ -23,7 +23,7 @@ router.post('/categories/create/:userId', requireSignin, isAuth, isAdmin, create
 router.put('/categories/:categoryId/:userId', requireSignin, isAuth, isAdmin, update);
 router.delete('/categories/:categoryId/:userId', requireSignin, isAuth, isAdmin, remove);
 
-router.param('categoryId', categoryById);
+router.param('slug', categoryBySlug);
 router.param('userId', userById);
 
 export default router;
