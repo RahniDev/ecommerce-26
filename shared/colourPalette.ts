@@ -1,9 +1,9 @@
-export type PaintColor = {
+export type ProductColor = {
     name: string;
     hex: string;
 };
 
-export const PAINT_COLOR_OPTIONS: PaintColor[] = [
+export const PRODUCT_COLOR_OPTIONS: ProductColor[] = [
     {
         name: "White",
         hex: "#FFFFFF"
@@ -51,4 +51,4 @@ export const PAINT_COLOR_OPTIONS: PaintColor[] = [
     }
 ];
 
-export const PAINT_COLOR_HEXES = PAINT_COLOR_OPTIONS.map(c => c.hex);
+export const PRODUCT_COLOR_HEXES = PRODUCT_COLOR_OPTIONS.map(c => c.hex);

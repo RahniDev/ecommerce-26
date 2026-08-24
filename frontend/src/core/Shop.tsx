@@ -14,7 +14,7 @@ import ProductCard from "./ProductCard";
 import Layout from "./Layout";
 import type { IProduct } from "../types";
 import { API } from '../config'
-import { PAINT_COLOR_OPTIONS } from "../../../shared/colourPalette";
+import { PRODUCT_COLOR_OPTIONS } from "../../../shared/colourPalette";
 
 const Shop = () => {
     const DEFAULT_FILTERS = {
@@ -146,7 +146,7 @@ const Shop = () => {
     ];
     const SIDEBAR_WIDTH = 260;
     return (
-        <Layout title="" description="Browse all paintings">
+        <Layout title="" description="Browse all handmade products">
             <Box>
                 {/* Top actions */}
                 <Box sx={{ mb: 3, display: "flex" }}>
@@ -216,7 +216,7 @@ const Shop = () => {
                                     gap: 1,
                                 }}
                             >
-                                {PAINT_COLOR_OPTIONS.map((color) => {
+                                {PRODUCT_COLOR_OPTIONS.map((color) => {
                                     const selected = filters.colors.includes(color.hex);
 
                                     return (

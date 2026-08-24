@@ -136,7 +136,7 @@ export const create = async (req: Request, res: Response) => {
             });
         });
 
-        let { name, price, category, weight, width, height, length, framing, material, medium, additionalDetails, quality, colors } = fields;
+        let { name, price, description, category, weight, width, height, length, material, additionalDetails, colors } = fields;
         // normalize fields to ensure expected type
         const normalize = (v: string | string[] | undefined) => Array.isArray(v) ? v[0] : v;
         const normalizeArray = (v: string | string[] | undefined) => {
@@ -146,16 +146,14 @@ export const create = async (req: Request, res: Response) => {
 
         const nameValue = normalize(name);
         const priceValue = Number(normalize(price));
+        const descriptionValue = normalize(fields.description);
         const categoryValue = normalize(category);
         const weightValue = Number(normalize(weight));
         const widthValue = normalize(width) ? Number(normalize(width)) : undefined;
         const heightValue = normalize(height) ? Number(normalize(height)) : undefined;
         const lengthValue = normalize(length) ? Number(normalize(length)) : undefined;
-        const framingValue = normalize(framing);
         const additionalDetailsValue = normalize(additionalDetails);
-        const qualityValue = normalize(quality);
         const materialValue = normalize(material);
-        const mediumValue = normalize(medium);
         const quantityValue = 1;
         const colorsValue = normalizeArray(colors);
 
@@ -173,17 +171,15 @@ export const create = async (req: Request, res: Response) => {
         const product = new Product({
             name: { en: nameValue, ...nameTranslations },
             price: priceValue,
+            description: descriptionValue,
             category: categoryValue,
             quantity: quantityValue,
             weight: weightValue,
             width: widthValue,
             height: heightValue,
             length: lengthValue,
-            framing: framingValue,
             material: materialValue,
-            medium: mediumValue,
             additionalDetails: additionalDetailsValue,
-            quality: qualityValue,
             colors: colorsValue
         });
 
@@ -338,7 +334,7 @@ export const listSearch = async (req: Request, res: Response) => {
 
     try {
         const products = await Product.find(query)
-            .select("name price category quantity sold weight width height length photos createdAt")
+            .select("name price description category quantity sold weight width height length photos createdAt")
             .lean();
 
         const transformedProducts = products.map(p => applyLang(p, lang as string));
@@ -458,13 +454,12 @@ export const listByFilters = async (req: Request, res: Response) => {
                 .select(`
             name
             price
+            description
             category
             quantity
             sold
             material
-            medium
             colors
-            framing
             weight
             width
             height

@@ -1,16 +1,16 @@
 import { Router } from "express";
 import { requireSignin, isAuth, isAdmin } from '../auth/auth.controller.js'
 import {
-create,
-productById,
-read,
-deleteProduct,
-update,
-list,
-listRelated,
-listCategories,
-listSearch,
-listByFilters
+    create,
+    productById,
+    read,
+    deleteProduct,
+    update,
+    list,
+    listRelated,
+    listCategories,
+    listSearch,
+    listByFilters
 } from './product.controller.js';
 import { userById } from '../user/user.controller.js'
 

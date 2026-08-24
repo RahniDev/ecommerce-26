@@ -102,14 +102,12 @@ export type ProductFormField =
   | "width"
   | "height"
   | "length"
-  | "framing"
   | "additionalDetails"
-  | "medium"
-  | "material"
-  | "quality";
+  | "material";
 
 export interface ProductFormBase {
   name: string;
+  description: string;
   price: string;
   weight: string;
   width: string;
@@ -119,9 +117,6 @@ export interface ProductFormBase {
   category: string;
   quantity?: string;
   material: string;
-  framing: string;
-  medium: string;
-  quality: string;
   colors: string[];
   loading: boolean;
   error: string;
@@ -197,13 +192,7 @@ export interface IProduct {
   _id: string;
   name: string;
   nameEn: string;
-  description:
-  | string
-  | {
-    en?: string;
-    fr?: string;
-    [key: string]: string | undefined;
-  };
+  description:string;
   price: number;
   category: any;
   quantity: number;
@@ -216,11 +205,8 @@ export interface IProduct {
   length?: number;
   count?: number;
   material?: string;
-  medium?: string;
   colors?: string[];
-  framing?: string;
   additionalDetails?: string;
-  quality?: string;
 }
 
 export interface IPriceRange {

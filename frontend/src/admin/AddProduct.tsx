@@ -19,7 +19,7 @@ import type { SelectChangeEvent } from "@mui/material/Select";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import { useNavigate, Link } from "react-router-dom";
-import { PAINT_COLOR_OPTIONS } from "../../../shared/colourPalette";
+import { PRODUCT_COLOR_OPTIONS } from "../../../shared/colourPalette";
 import ProductImage from "../core/ShowImage";
 
 const AddProduct: React.FC = () => {
@@ -30,6 +30,7 @@ const AddProduct: React.FC = () => {
   const [imgPreviews, setImgPreviews] = useState<string[]>([]);
   const [values, setValues] = useState<AddProductValues>({
     name: "",
+    description: "",
     price: "",
     weight: "",
     width: "",
@@ -43,26 +44,21 @@ const AddProduct: React.FC = () => {
     createdProduct: false,
     createdProductName: "",
     createdProductId: "",
-    framing: "",
     additionalDetails: "",
     material: "",
-    medium: "",
     colors: [],
-    quality: ""
   });
 
   const {
     name,
+    description,
     price,
     categories,
     category,
     loading,
     error,
     createdProduct,
-    framing,
     additionalDetails,
-    quality,
-    medium,
     colors,
     material
   } = values;
@@ -166,6 +162,7 @@ const AddProduct: React.FC = () => {
           createdProductName: typeof rawName === "object" ? rawName?.en : rawName ?? "",
           createdProductId: res.data?._id ?? "",
           name: "",
+          description: "",
           price: "",
           category: "",
           weight: "",
@@ -174,11 +171,8 @@ const AddProduct: React.FC = () => {
           length: "",
           photos: [],
           additionalDetails: "",
-          quality: "",
           material: "",
-          medium: "",
           colors: [],
-          framing: ""
         }));
         setImgPreviews([]);
         formData.current = new FormData();
@@ -192,8 +186,8 @@ const AddProduct: React.FC = () => {
 
   return (
     <Layout
-      title="Add a new painting"
-      description={`Hello ${user?.name || ""}, ready to add a new painting?`}
+      title="Add a new product"
+      description={`Hello ${user?.name || ""}, ready to add a new product?`}
     >
       <Container maxWidth="md">
         <Box sx={{ mt: 4 }}>
@@ -216,7 +210,7 @@ const AddProduct: React.FC = () => {
             onSubmit={clickSubmit}
             sx={{ display: "flex", flexDirection: "column", gap: 2 }}
           >
-            <Typography variant="h6">Painting Photo</Typography>
+            <Typography variant="h6">Product Photo</Typography>
 
             <Box
               sx={{
@@ -264,6 +258,13 @@ const AddProduct: React.FC = () => {
               fullWidth
             />
 
+            <TextField
+              label="Description"
+              value={description}
+              onChange={handleInputChange("description")}
+              fullWidth
+            />
+
             <FormControl fullWidth>
               <InputLabel>Category</InputLabel>
               <Select value={category} label="Category" onChange={handleCategoryChange}>
@@ -307,7 +308,7 @@ const AddProduct: React.FC = () => {
                   alignItems: "center",
                 }}
               >
-                {PAINT_COLOR_OPTIONS.map((color) => {
+                {PRODUCT_COLOR_OPTIONS.map((color) => {
                   const selected = colors.includes(color.hex);
 
                   return (
@@ -338,33 +339,13 @@ const AddProduct: React.FC = () => {
               {colors.length > 0 && (
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1.5 }}>
                   Selected:{" "}
-                  {PAINT_COLOR_OPTIONS
+                  {PRODUCT_COLOR_OPTIONS
                     .filter(c => colors.includes(c.hex))
                     .map(c => c.name)
                     .join(", ")}
                 </Typography>
               )}
             </Box>
-
-            <FormControl fullWidth>
-              <InputLabel>Medium</InputLabel>
-              <Select
-                value={medium}
-                label="Medium"
-                onChange={handleSelectChange("medium")}
-              >
-                <MenuItem value="">
-                  <em>Please select</em>
-                </MenuItem>
-                <MenuItem value="Watercolour">Watercolour</MenuItem>
-                <MenuItem value="Acrylic">Acrylic</MenuItem>
-                <MenuItem value="Oil pastel">Oil pastel</MenuItem>
-                <MenuItem value="Gouache">Gouache</MenuItem>
-                <MenuItem value="Ink">Ink</MenuItem>
-                <MenuItem value="Charcoal">Charcoal</MenuItem>
-                <MenuItem value="Mixed media">Mixed media</MenuItem>
-              </Select>
-            </FormControl>
 
             <TextField
               label="Width (cm)"
@@ -382,33 +363,8 @@ const AddProduct: React.FC = () => {
               fullWidth
             />
 
-            <FormControl fullWidth>
-              <InputLabel>Framing</InputLabel>
-              <Select
-                value={framing}
-                label="Framing"
-                onChange={handleSelectChange("framing")}
-              >
-                <MenuItem value="Unframed">Unframed</MenuItem>
-                <MenuItem value="Ready to hang">Ready to hang</MenuItem>
-              </Select>
-            </FormControl>
-
-            <FormControl fullWidth>
-              <InputLabel>Quality</InputLabel>
-              <Select
-                value={quality}
-                label="Quality"
-                onChange={handleSelectChange("quality")}
-              >
-                <MenuItem value="Low quality">Low quality</MenuItem>
-                <MenuItem value="Medium quality">Medium quality</MenuItem>
-                <MenuItem value="High quality">High quality</MenuItem>
-              </Select>
-            </FormControl>
-
             <TextField
-              label="Additional Details e.g: painting scuffed on the bottom left"
+              label="Additional Details"
               value={additionalDetails}
               onChange={handleInputChange("additionalDetails")}
               multiline
@@ -441,7 +397,7 @@ const AddProduct: React.FC = () => {
               sx={{ mt: 2 }}
               disabled={loading}
             >
-              Add Painting
+              Add Product
             </Button>
           </Box>
         </Box>

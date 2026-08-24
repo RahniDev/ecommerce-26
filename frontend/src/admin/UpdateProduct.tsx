@@ -26,7 +26,7 @@ import {
     Typography,
 } from "@mui/material";
 import type { SelectChangeEvent } from "@mui/material/Select";
-import { PAINT_COLOR_OPTIONS } from "../../../shared/colourPalette";
+import { PRODUCT_COLOR_OPTIONS } from "../../../shared/colourPalette";
 import ShowImage from "../core/ShowImage";
 
 const UpdateProduct = () => {
@@ -45,6 +45,7 @@ const UpdateProduct = () => {
     const [values, setValues] = useState<UpdateProductValues>({
         name: "",
         price: "",
+        description: "",
         weight: "",
         width: "",
         height: "",
@@ -57,16 +58,14 @@ const UpdateProduct = () => {
         updatedProduct: false,
         updatedProductName: "",
         material: "",
-        medium: "",
         colors: [],
-        framing: "",
         additionalDetails: "",
-        quality: "",
     });
 
     const {
         name,
         price,
+        description,
         categories,
         category,
         loading,
@@ -74,11 +73,8 @@ const UpdateProduct = () => {
         updatedProduct,
         updatedProductName,
         material,
-        medium,
         colors,
-        framing,
         additionalDetails,
-        quality,
     } = values;
 
     const formData = useRef<FormData | null>(null);
@@ -143,20 +139,18 @@ const UpdateProduct = () => {
                     ...prev,
                     error: res.error ?? "Failed to load product",
                 }));
-                
+
                 return;
             }
 
             const product = res.data;
-setProduct(product);
+            setProduct(product);
             const fd = new FormData();
             fd.set("name", product.name ?? "");
+            fd.set("description", product.description ?? "");
             fd.set("price", product.price?.toString() ?? "");
             fd.set("category", product.category?._id ?? "");
             fd.set("material", product.material ?? "");
-            fd.set("medium", product.medium ?? "");
-            fd.set("framing", product.framing ?? "");
-            fd.set("quality", product.quality ?? "");
             fd.set("additionalDetails", product.additionalDetails ?? "");
             fd.set("weight", product.weight?.toString() ?? "");
             fd.set("width", product.width?.toString() ?? "");
@@ -173,11 +167,9 @@ setProduct(product);
                 ...prev,
                 name: product.name ?? "",
                 price: product.price?.toString() ?? "",
+                description: product.description ?? "",
                 category: product.category?._id ?? "",
                 material: product.material ?? "",
-                medium: product.medium ?? "",
-                framing: product.framing ?? "",
-                quality: product.quality ?? "",
                 additionalDetails: product.additionalDetails ?? "",
                 colors: product.colors ?? [],
                 weight: product.weight?.toString() ?? "",
@@ -313,11 +305,11 @@ setProduct(product);
             }));
         }
     };
-   const productPhoto = photosPreview.length > 0
+    const productPhoto = photosPreview.length > 0
         ? {
-              _id: product?._id ?? "",
-              photos: photosPreview.map((url) => ({ url })),
-          }
+            _id: product?._id ?? "",
+            photos: photosPreview.map((url) => ({ url })),
+        }
         : product;
     return (
         <Layout
@@ -345,7 +337,7 @@ setProduct(product);
                         onSubmit={clickSubmit}
                         sx={{ display: "flex", flexDirection: "column", gap: 2 }}
                     >
-                        <Typography variant="h6">Painting Photo</Typography>
+                        <Typography variant="h6">Product Photo</Typography>
 
                         <Box
                             sx={{
@@ -395,6 +387,13 @@ setProduct(product);
                             fullWidth
                             required
                         />
+                        <TextField
+                            label="Description"
+                            value={description}
+                            onChange={handleInputChange("description")}
+                            fullWidth
+                            required
+                        />
 
                         <FormControl fullWidth>
                             <InputLabel>Category</InputLabel>
@@ -439,7 +438,7 @@ setProduct(product);
                                     alignItems: "center",
                                 }}
                             >
-                                {PAINT_COLOR_OPTIONS.map((color) => {
+                                {PRODUCT_COLOR_OPTIONS.map((color) => {
                                     const selected = colors.includes(color.hex);
 
                                     return (
@@ -470,33 +469,13 @@ setProduct(product);
                             {colors.length > 0 && (
                                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1.5 }}>
                                     Selected:{" "}
-                                    {PAINT_COLOR_OPTIONS
+                                    {PRODUCT_COLOR_OPTIONS
                                         .filter((c) => colors.includes(c.hex))
                                         .map((c) => c.name)
                                         .join(", ")}
                                 </Typography>
                             )}
                         </Box>
-
-                        <FormControl fullWidth>
-                            <InputLabel>Medium</InputLabel>
-                            <Select
-                                value={medium}
-                                label="Medium"
-                                onChange={handleSelectChange("medium")}
-                            >
-                                <MenuItem value="">
-                                    <em>Please select</em>
-                                </MenuItem>
-                                <MenuItem value="Watercolour">Watercolour</MenuItem>
-                                <MenuItem value="Acrylic">Acrylic</MenuItem>
-                                <MenuItem value="Oil pastel">Oil pastel</MenuItem>
-                                <MenuItem value="Gouache">Gouache</MenuItem>
-                                <MenuItem value="Ink">Ink</MenuItem>
-                                <MenuItem value="Charcoal">Charcoal</MenuItem>
-                                <MenuItem value="Mixed media">Mixed media</MenuItem>
-                            </Select>
-                        </FormControl>
 
                         <TextField
                             label="Width (cm)"
@@ -514,39 +493,8 @@ setProduct(product);
                             fullWidth
                         />
 
-                        <FormControl fullWidth>
-                            <InputLabel>Framing</InputLabel>
-                            <Select
-                                value={framing}
-                                label="Framing"
-                                onChange={handleSelectChange("framing")}
-                            >
-                                <MenuItem value="">
-                                    <em>Please select</em>
-                                </MenuItem>
-                                <MenuItem value="Unframed">Unframed</MenuItem>
-                                <MenuItem value="Ready to hang">Ready to hang</MenuItem>
-                            </Select>
-                        </FormControl>
-
-                        <FormControl fullWidth>
-                            <InputLabel>Quality</InputLabel>
-                            <Select
-                                value={quality}
-                                label="Quality"
-                                onChange={handleSelectChange("quality")}
-                            >
-                                <MenuItem value="">
-                                    <em>Please select</em>
-                                </MenuItem>
-                                <MenuItem value="Low quality">Low quality</MenuItem>
-                                <MenuItem value="Medium quality">Medium quality</MenuItem>
-                                <MenuItem value="High quality">High quality</MenuItem>
-                            </Select>
-                        </FormControl>
-
                         <TextField
-                            label="Additional Details e.g: painting scuffed on the bottom left"
+                            label="Additional Details"
                             value={additionalDetails}
                             onChange={handleInputChange("additionalDetails")}
                             multiline
@@ -579,7 +527,7 @@ setProduct(product);
                             sx={{ mt: 2 }}
                             disabled={loading}
                         >
-                            Update Painting
+                            Update Product
                         </Button>
                     </Box>
                 </Box>

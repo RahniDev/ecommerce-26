@@ -1,5 +1,5 @@
 import mongoose, { Schema, Types, Document } from "mongoose";
-import { PAINT_COLOR_HEXES } from "../../../../shared/colourPalette.js";
+import { PRODUCT_COLOR_HEXES } from "../../../../shared/colourPalette.js";
 
 export interface IProduct {
   name: {
@@ -32,14 +32,11 @@ export interface IProduct {
     };
   }[];
   material: string;
-  medium: string;
   weight: number;
   width: number;
   height: number;
   length: number;
-  framing: string;
   additionalDetails: string;
-  quality: string;
   colors: string[];
 }
 
@@ -58,6 +55,13 @@ const productSchema = new Schema<IProductDocument>({
     trim: true,
     required: true,
     maxlength: 32
+  },
+  description: {
+    en: { type: String, default: '' },
+    de: { type: String, default: '' },
+    es: { type: String, default: '' },
+    it: { type: String, default: '' },
+    fr: { type: String, default: '' }
   },
   category: {
     type: Schema.Types.ObjectId,
@@ -91,34 +95,16 @@ const productSchema = new Schema<IProductDocument>({
     enum: ["Paper", "Canvas", "Other"],
     default: "Canvas"
   },
-  medium: {
-    type: String,
-    enum: [
-      "Watercolour",
-      "Acrylic",
-      "Oil pastel",
-      "Gouache",
-      "Ink",
-      "Charcoal",
-      "Mixed media"
-    ]
-  },
   // cm
   width: Number,
   height: Number,
   length: Number,
-  framing: {
-    type: String,
-    enum: ["Unframed", "Ready to hang"],
-    default: "Unframed"
-  },
   colors: {
     type: [String],
-    enum: PAINT_COLOR_HEXES,
+    enum: PRODUCT_COLOR_HEXES,
     default: [],
   },
   additionalDetails: String,
-  quality: String
 }, { timestamps: true });
 
 export const Product = mongoose.model<IProductDocument>("Product", productSchema);
