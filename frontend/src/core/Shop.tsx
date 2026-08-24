@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import {
     Box,
     Typography,
-    Checkbox,
     Button,
-    FormControlLabel,
-    FormGroup,
     Divider,
     Slider,
     Paper,
@@ -22,10 +19,8 @@ import { PAINT_COLOR_OPTIONS } from "../../../shared/colourPalette";
 const Shop = () => {
     const DEFAULT_FILTERS = {
         material: [] as string[],
-        framing: [] as string[],
         price: [0, 5000] as number[],
         size: [] as string[],
-        medium: [] as string[],
         colors: [] as string[]
     };
     const [products, setProducts] = useState<IProduct[]>([]);
@@ -37,7 +32,7 @@ const Shop = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [totalProducts, setTotalProducts] = useState(0);
     const handleCheckbox = (
-        filterName: "material" | "framing" | "size" | "medium" | "colors",
+        filterName: "material" | "size" | "colors",
         value: string
     ) => {
         const current = [...filters[filterName]];
@@ -51,16 +46,6 @@ const Shop = () => {
             [filterName]: updated,
         }));
     };
-
-    const mediums = [
-        "Watercolour",
-        "Acrylic",
-        "Oil pastel",
-        "Gouache",
-        "Ink",
-        "Charcoal",
-        "Mixed media"
-    ];
 
     useEffect(() => {
         setPage(1);
@@ -106,7 +91,7 @@ const Shop = () => {
     };
 
     const removeFilter = (
-        filterName: "material" | "framing" | "size" | "medium" | "colors" | "price",
+        filterName: "material" | "size" | "colors" | "price",
         value?: string
     ) => {
         if (filterName === "price") {
@@ -141,18 +126,6 @@ const Shop = () => {
             key: `material-${value}`,
             label: value,
             filterName: "material" as const,
-            value,
-        })),
-        ...filters.medium.map(value => ({
-            key: `medium-${value}`,
-            label: value,
-            filterName: "medium" as const,
-            value,
-        })),
-        ...filters.framing.map(value => ({
-            key: `framing-${value}`,
-            label: value,
-            filterName: "framing" as const,
             value,
         })),
         ...filters.colors.map(value => ({
@@ -214,52 +187,23 @@ const Shop = () => {
                             <Typography variant="h6" gutterBottom>
                                 Filters
                             </Typography>
-
+                            <Divider sx={{ my: 2 }} />
                             <Typography fontWeight={600}>
-                                Size
+                                Price (€)
                             </Typography>
 
-                            <FormGroup>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={filters.size.includes("Small")}
-                                            onChange={() => handleCheckbox("size", "Small")}
-                                        />
-                                    }
-                                    label="Small (<30 cm)"
-                                />
-
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={filters.size.includes("Medium")}
-                                            onChange={() => handleCheckbox("size", "Medium")}
-                                        />
-                                    }
-                                    label="Medium (30–50 cm)"
-                                />
-
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={filters.size.includes("Large")}
-                                            onChange={() => handleCheckbox("size", "Large")}
-                                        />
-                                    }
-                                    label="Large (50–70 cm)"
-                                />
-
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={filters.size.includes("Oversized")}
-                                            onChange={() => handleCheckbox("size", "Oversized")}
-                                        />
-                                    }
-                                    label="Oversized (>70 cm)"
-                                />
-                            </FormGroup>
+                            <Slider
+                                value={filters.price}
+                                onChange={(_, value) =>
+                                    setFilters(prev => ({
+                                        ...prev,
+                                        price: value as number[],
+                                    }))
+                                }
+                                valueLabelDisplay="auto"
+                                min={0}
+                                max={5000}
+                            />
                             <Divider sx={{ my: 2 }} />
                             <Typography fontWeight={600} mb={1}>
                                 Colour
@@ -268,7 +212,7 @@ const Shop = () => {
                             <Box
                                 sx={{
                                     display: "grid",
-                                    gridTemplateColumns: "repeat(12, 15px)",
+                                    gridTemplateColumns: "repeat(6, 15px)",
                                     gap: 1,
                                 }}
                             >
@@ -318,129 +262,6 @@ const Shop = () => {
                                     Remove colour filter
                                 </Typography>
                             )}
-                            <Divider sx={{ my: 2 }} />
-
-                            <Typography fontWeight={600}>
-                                Material
-                            </Typography>
-
-                            <FormGroup>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={filters.material.includes("Paper")}
-                                            onChange={() =>
-                                                handleCheckbox("material", "Paper")
-                                            }
-                                        />
-                                    }
-                                    label="Paper"
-                                />
-
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={filters.material.includes("Canvas")}
-                                            onChange={() =>
-                                                handleCheckbox("material", "Canvas")
-                                            }
-                                        />
-                                    }
-                                    label="Canvas"
-                                />
-
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={filters.material.includes("Other")}
-                                            onChange={() =>
-                                                handleCheckbox("material", "Other")
-                                            }
-                                        />
-                                    }
-                                    label="Other"
-                                />
-                            </FormGroup>
-
-                            <Divider sx={{ my: 2 }} />
-                            <Typography fontWeight={600}>
-                                Medium
-                            </Typography>
-
-                            <FormGroup>
-                                {mediums.map(medium => (
-                                    <FormControlLabel
-                                        key={medium}
-                                        control={
-                                            <Checkbox
-                                                checked={filters.medium.includes(medium)}
-                                                onChange={() => handleCheckbox("medium", medium)}
-                                            />
-                                        }
-                                        label={medium}
-                                    />
-                                ))}
-                            </FormGroup>
-                            <Divider sx={{ my: 2 }} />
-
-                            <Typography fontWeight={600}>
-                                Framing
-                            </Typography>
-
-                            <FormGroup>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={filters.framing.includes(
-                                                "Ready to hang"
-                                            )}
-                                            onChange={() =>
-                                                handleCheckbox(
-                                                    "framing",
-                                                    "Ready to hang"
-                                                )
-                                            }
-                                        />
-                                    }
-                                    label="Ready to hang"
-                                />
-
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={filters.framing.includes(
-                                                "Unframed"
-                                            )}
-                                            onChange={() =>
-                                                handleCheckbox(
-                                                    "framing",
-                                                    "Unframed"
-                                                )
-                                            }
-                                        />
-                                    }
-                                    label="Unframed"
-                                />
-                            </FormGroup>
-
-                            <Divider sx={{ my: 2 }} />
-
-                            <Typography fontWeight={600}>
-                                Price (€)
-                            </Typography>
-
-                            <Slider
-                                value={filters.price}
-                                onChange={(_, value) =>
-                                    setFilters(prev => ({
-                                        ...prev,
-                                        price: value as number[],
-                                    }))
-                                }
-                                valueLabelDisplay="auto"
-                                min={0}
-                                max={5000}
-                            />
                         </Paper>
                     )}
 
@@ -533,7 +354,7 @@ const Shop = () => {
                         )}
 
                         <Typography color="text.secondary" mb={4}>
-                            {totalProducts} artworks found
+                            {totalProducts} products found
                         </Typography>
 
                         <Masonry
