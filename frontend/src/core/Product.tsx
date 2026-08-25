@@ -23,10 +23,10 @@ const Product: React.FC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalSrc, setModalSrc] = useState<string>("");
 
-const handleImageClick = (src: string) => {
-  setModalSrc(src);
-  setModalOpen(true);
-};
+  const handleImageClick = (src: string) => {
+    setModalSrc(src);
+    setModalOpen(true);
+  };
 
   const { product, related, loading, error } = useSelector(
     (state: RootState) => state.product
@@ -127,7 +127,7 @@ const handleImageClick = (src: string) => {
             </Typography>
           </Grid>
           {related.slice(0, 4).map((p) => (
-            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={p._id}>
+            <Grid size={{ xs: 6, sm: 4, md: 3 }} key={p._id}>
               <ProductCard product={{ ...p, count: 1 }} />
             </Grid>
           ))}
