@@ -1,5 +1,5 @@
 {
-  "add_to_cart": "Acquisisci",
+  "add_to_cart": "Aggiungi al carrello",
   "similar_paintings": "Dipinti simili",
   "cart_items_count": "Il tuo carrello contiene {{count}} articolo{{count > 1 ? 'i' : ''}}",
   "empty_cart": "Il tuo carrello è vuoto",

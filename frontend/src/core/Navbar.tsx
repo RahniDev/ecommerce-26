@@ -98,6 +98,7 @@ const Navbar: React.FC = () => {
         <CategoryDropdown
           categories={categories}
           navigate={navigate}
+          mobile
         />
       </List>
     </Drawer>
