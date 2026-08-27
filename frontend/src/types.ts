@@ -192,7 +192,7 @@ export interface IProduct {
   _id: string;
   name: string;
   nameEn: string;
-  description:string;
+  description: string;
   price: number;
   category: any;
   quantity: number;
@@ -284,12 +284,12 @@ export interface SearchState {
   searched: boolean;
 }
 
-export interface FilterState {
-  filters: {
-    category: string[];
-    price: number[];
-  };
-}
+export type FilterState = {
+  material: string[];
+  price: number[];
+  size: string[];
+  colors: string[];
+};
 
 export interface SigninState {
   email: string;
