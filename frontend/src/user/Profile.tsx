@@ -101,7 +101,7 @@ const Profile: React.FC = () => {
   };
 
   const profileUpdateForm = () => (
-    <Box component="form" sx={{ maxWidth: 400 }}>
+    <Box component="form" sx={{ maxWidth: 400, mx: "auto"}} noValidate autoComplete="off">
       <Stack spacing={2}>
         <TextField
           label={t("name")}
@@ -138,9 +138,9 @@ const Profile: React.FC = () => {
   if (success) return <Navigate to="/cart" replace />;
 
   return (
-    <Layout title="Profile" description="Update your profile">
+    <Layout title="" description="Update your profile">
       <Box maxWidth="md" mx="auto" mt={4}>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h5" textAlign="center" gutterBottom>
           Update profile
         </Typography>
 
