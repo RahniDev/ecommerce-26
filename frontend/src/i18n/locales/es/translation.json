@@ -19,6 +19,7 @@
   "forgot_password": "¿Olvidaste tu contraseña?",
   "existing_account": "¿Ya tienes una cuenta?",
   "no_account": "¿Aún no tienes una cuenta?",
+  "account_created": "Cuenta creada correctamente.",
   "email": "Correo electrónico",
   "name": "Nombre",
   "update": "Actualizar",
