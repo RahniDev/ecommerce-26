@@ -77,7 +77,7 @@ export const createColissimoLabel = async (
       },
     };
 
-    const BASE_URL = "https://api.laposte.fr/sls-ws/SlsServiceWSRest";
+    const BASE_URL = "https://ws.colissimo.fr/sls-ws/SlsServiceWSRest/3.1/generateLabel";
 
     const response = await axios.post(`${BASE_URL}/generateLabel`, payload, {
       headers: {

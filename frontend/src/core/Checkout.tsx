@@ -11,6 +11,7 @@ import AddressForm from "./AddressForm";
 import { MuiTelInput } from 'mui-tel-input';
 import type { Address, CheckoutState, CartItem } from "../types";
 import ShippingRates from "./ShippingRates";
+import { API } from "../config";
 
 interface CheckoutProps {
   onSuccess: () => void;
@@ -157,7 +158,7 @@ const Checkout: React.FC<CheckoutProps> = ({ onSuccess }) => {
       await createOrder({ userId, token, orderData });
 
       // Buy shipping label
-      await fetch("/api/shipping/buy", {
+      await fetch(`${API}/shipping/buy`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
