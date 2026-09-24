@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { getProducts } from "./apiCore";
 import type { IProduct, ApiResponse } from "../types";
 import ListProducts from './ListProducts'
-import { Box, Typography, Alert } from "@mui/material";
+import { Box, Button, Typography, Alert } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import Loader from "./Loader";
-import Search from "./Search";
 import CollectionSlider from "./CollectionSlider";
 import Layout from "./Layout";
 import { useSelector } from "react-redux";
@@ -45,8 +44,11 @@ const Home: React.FC = () => {
   return (
     <Layout title="" description="">
       <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
-        <Box>
-          <Search />
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mt: 4 }}>
+          <h1>{t("home_title")}</h1>
+          <Button variant="contained" sx={{ mb: 6, display: "flex", justifyContent: "center" }} href="/shop">
+            {t("shop_button")}
+          </Button>
         </Box>
       </Box>
 
@@ -61,7 +63,7 @@ const Home: React.FC = () => {
 
       {/* No new arrivals */}
       <Typography sx={{ pb: 4 }} variant="h2" component="h2" textAlign="center">
-        {t("latest_originals")}
+        {t("latest_products")}
       </Typography>
 
       {productsByArrival.length === 0 && !loading && !error && (

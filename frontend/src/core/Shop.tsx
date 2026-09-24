@@ -14,6 +14,7 @@ import Layout from "./Layout";
 import Filters from "./Filters";
 import type { FilterState, IProduct } from "../types";
 import { API } from "../config";
+import Search from "./Search";
 
 const DEFAULT_FILTERS: FilterState = {
     material: [],
@@ -170,6 +171,9 @@ const Shop = () => {
             description="Browse all handmade products"
         >
             <Box>
+                <Box sx={{ display: "flex", justifyContent: "center"}}>
+                <Search />
+                </Box>
                 <Box
                     sx={{
                         mb: 3,
