@@ -13,7 +13,6 @@ import ProductImage from "./ShowImage";
 import { Box, Typography, Grid } from "@mui/material";
 import ImageModal from "./ImageModal";
 import { toCartItem } from "../redux/slices/cartSlice";
-import { useLocalizedDescription } from "../hooks/useLocalizedDescription";
 
 
 const Product: React.FC = () => {
@@ -44,7 +43,6 @@ const Product: React.FC = () => {
   }, [dispatch, productId, currentLanguage]);
 
 
-  const { description } = useLocalizedDescription(product);
 
   return (
     <Layout title="" description="">
@@ -95,7 +93,7 @@ const Product: React.FC = () => {
                   </Typography>
 
                   <Typography sx={{ whiteSpace: "pre-wrap", my: 2 }} variant="body1" color="text.primary">
-                    {description}
+                    {product.description}
                   </Typography>
 
                   <SoldBadge quantity={product.quantity} />

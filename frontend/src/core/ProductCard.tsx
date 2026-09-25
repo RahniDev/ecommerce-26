@@ -6,7 +6,6 @@ import SoldBadge from "./SoldBadge";
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { addToCart } from "../redux/slices/cartSlice";
 import { useDispatch } from "react-redux";
-import { useLocalizedDescription } from "../hooks/useLocalizedDescription";
 
 const ProductCard: React.FC<CardProps> = ({
     product,
@@ -16,8 +15,6 @@ const ProductCard: React.FC<CardProps> = ({
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const { description } = useLocalizedDescription(product);
 
     const handleAddToCart = () => {
         dispatch(addToCart(product));
@@ -81,7 +78,7 @@ const ProductCard: React.FC<CardProps> = ({
                             )}
                         </Box>
                         {product.quantity !== 0 && (
-                            <Typography sx={{ whiteSpace: "pre-wrap" }} color={secondaryColor}> {description}</Typography>
+                            <Typography sx={{ whiteSpace: "pre-wrap" }} color={secondaryColor}> {product.description}</Typography>
                         )}
                         <SoldBadge quantity={product.quantity} />
                     </Stack>

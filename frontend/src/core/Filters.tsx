@@ -16,7 +16,7 @@ type FiltersProps = {
 const Filters = ({ filters, setFilters }: FiltersProps) => {
 
     const handleCheckbox = (
-        filterName: "material" | "size" | "colors",
+        filterName: "size" | "colors",
         value: string
     ) => {
         const current = [...filters[filterName]];

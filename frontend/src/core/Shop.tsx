@@ -17,7 +17,6 @@ import { API } from "../config";
 import Search from "./Search";
 
 const DEFAULT_FILTERS: FilterState = {
-    material: [],
     price: [0, 5000],
     size: [],
     colors: [],
@@ -60,7 +59,7 @@ const Shop = () => {
 
     // Remove an individual filter
     const removeFilter = (
-        filterName: "material" | "size" | "colors" | "price",
+        filterName: "size" | "colors" | "price",
         value?: string
     ) => {
         if (filterName === "price") {
@@ -129,13 +128,6 @@ const Shop = () => {
             key: `size-${value}`,
             label: value,
             filterName: "size" as const,
-            value,
-        })),
-
-        ...filters.material.map(value => ({
-            key: `material-${value}`,
-            label: value,
-            filterName: "material" as const,
             value,
         })),
 
