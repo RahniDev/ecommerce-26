@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { Box, Grid, Typography, Link, Divider, IconButton } from "@mui/material";
-import InstagramIcon from "@mui/icons-material/Instagram";
+import { Box, Grid, Typography, Link, Divider } from "@mui/material";
+// import InstagramIcon from "@mui/icons-material/Instagram";
 import { getCategories } from "./apiCore";
 import type { Category } from "../types";
 
@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
                     <Box component="ul" sx={{ listStyle: "none", p: 0, m: 0 }}>
                         {topLevel.map(c => (
                             <li key={c._id}>
-                                <Link component={RouterLink} to={`/collection/${c._id}`} underline="hover" color="textPrimary">
+                                <Link component={RouterLink} to={`/shop/${c.slug}`} underline="hover" color="textPrimary">
                                     {c.name}
                                 </Link>
                             </li>
@@ -53,11 +53,11 @@ const Footer: React.FC = () => {
                 </Grid>
 
                 {/* Social */}
-                <Grid size={{ xs: 4, md: 2 }}>
-                    <IconButton component="a" href="https://instagram.com/rahni.crafts" target="_blank" rel="noopener noreferrer" color="primary">
+                {/* <Grid size={{ xs: 4, md: 2 }}>
+                    <IconButton component="a" href="https://instagram.com" target="_blank" rel="noopener noreferrer" color="primary">
                         <InstagramIcon />
                     </IconButton>
-                </Grid>
+                </Grid> */}
 
             </Grid>
             <Divider sx={{ my: 3 }} />
