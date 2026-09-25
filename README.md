@@ -20,14 +20,14 @@ Using React Compiler for optimal performance
 - Email to user when order is shipped
 - Search products
 - Multiple image upload 
-- Thumbnails and modal on product page
+- Thumbnails on product page
 - Related products section on product page
 - Product breadcrumbs
 - React multi-language translation using I18n
 - Translation of product names & descriptions using DeepL
-- Newsletter signup form - Mailchimp
+- Newsletter signup form using Mailchimp
 - Product images stored on Cloudfare
-- Shop page: filter paintings by colour, material, medium, size, framing and price
+- Shop page: filter products by price and colour
 
 ### Security
 - API Rate limiting

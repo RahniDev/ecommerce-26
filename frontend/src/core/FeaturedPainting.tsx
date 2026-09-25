@@ -5,7 +5,7 @@ import { fetchProduct } from "../redux/slices/productSlice";
 import type { RootState, AppDispatch } from "../redux/store";
 import ShowImage from "./ShowImage";
 
-const FeaturedPainting = () => {
+const FeaturedProduct = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { product, loading, error } = useSelector(
@@ -41,9 +41,9 @@ const FeaturedPainting = () => {
     return (
       <Box bgcolor="#e8e8e8" p={4}>
         <Typography variant="h2" textAlign="center">
-          Featured Painting
+          Featured Product
         </Typography>
-        <Typography textAlign="center">No featured painting available</Typography>
+        <Typography textAlign="center">No featured product available</Typography>
       </Box>
     );
   }
@@ -66,4 +66,4 @@ const FeaturedPainting = () => {
   );
 };
 
-export default FeaturedPainting;
+export default FeaturedProduct;

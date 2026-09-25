@@ -121,7 +121,7 @@ const Product: React.FC = () => {
         <Grid container size={12} spacing={3} mt={2}>
           <Grid size={12}>
             <Typography variant="h5" mt={4}>
-              {t("similar_paintings")}
+              {t("similar_products")}
             </Typography>
           </Grid>
           {related.slice(0, 4).map((p) => (

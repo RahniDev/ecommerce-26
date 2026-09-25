@@ -59,7 +59,6 @@ const Home: React.FC = () => {
       )}
 
       <Loader loading={loading} />
-      {/* <FeaturedPainting /> */}
 
       {/* No new arrivals */}
       <Typography sx={{ pb: 4 }} variant="h2" component="h2" textAlign="center">

@@ -37,7 +37,7 @@ export const createColissimoLabel = async (
       value: item.price * (item.count ?? 1),
       currency: "EUR",
       originCountry: "FR",
-      hsCode: item.hsCode || "970110", // default HS code for paintings
+      hsCode: item.hsCode || "970110", // default HS code for products
     }));
 
     const payload = {

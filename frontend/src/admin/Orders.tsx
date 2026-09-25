@@ -135,7 +135,7 @@ const Orders: React.FC = () => {
                                         sx={{ p: 2, mb: 2 }}
                                     >
                                         <Typography variant="body1" gutterBottom sx={{ mb: 2 }}>
-                                            Painting Name: {p.name}
+                                            Product Name: {p.name}
                                         </Typography>
 
                                         <ShowImage
