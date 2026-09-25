@@ -46,7 +46,7 @@ const Home: React.FC = () => {
       <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mt: 4 }}>
           <h1>{t("home_title")}</h1>
-          <Button variant="contained" sx={{ mb: 6, display: "flex", justifyContent: "center" }} href="/shop">
+          <Button variant="contained" sx={{ mb: 6 }} href="/shop">
             {t("shop_button")}
           </Button>
         </Box>
@@ -82,6 +82,11 @@ const Home: React.FC = () => {
         {productsByArrival.length > 0 && !loading && !error && (
           <ListProducts products={productsByArrival} />
         )}
+      </Box>
+      <Box sx={{ display: "flex", justifyContent: "center", mb: 6 }}>
+        <Button variant="contained" href="/shop">
+          {t("view_all_button")}
+        </Button>
       </Box>
       <CollectionSlider />
 

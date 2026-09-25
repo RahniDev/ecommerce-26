@@ -39,7 +39,7 @@ export const productById = async (
 
         const product = await Product.findById(id)
             .populate("category")
-            .select("name price category quantity sold weight width height length photos material medium createdAt")
+            .select("name price category quantity sold weight width height length photos medium createdAt")
 
 
         if (!product) {
@@ -85,7 +85,7 @@ export const list = async (req: Request, res: Response) => {
         const products = await Product.find({
             quantity: { $gt: 0 }
         })
-            .select("name price category quantity sold weight width height length photos material medium createdAt")
+            .select("name price category quantity sold weight width height length photos medium createdAt")
             .sort({ createdAt: -1 })
             .limit(12)
             .lean();
@@ -136,7 +136,7 @@ export const create = async (req: Request, res: Response) => {
             });
         });
 
-        let { name, price, description, category, weight, width, height, length, material, additionalDetails, colors } = fields;
+        let { name, price, description, category, weight, width, height, length, colors } = fields;
         // normalize fields to ensure expected type
         const normalize = (v: string | string[] | undefined) => Array.isArray(v) ? v[0] : v;
         const normalizeArray = (v: string | string[] | undefined) => {
@@ -152,8 +152,6 @@ export const create = async (req: Request, res: Response) => {
         const widthValue = normalize(width) ? Number(normalize(width)) : undefined;
         const heightValue = normalize(height) ? Number(normalize(height)) : undefined;
         const lengthValue = normalize(length) ? Number(normalize(length)) : undefined;
-        const additionalDetailsValue = normalize(additionalDetails);
-        const materialValue = normalize(material);
         const quantityValue = 1;
         const colorsValue = normalizeArray(colors);
 
@@ -178,8 +176,6 @@ export const create = async (req: Request, res: Response) => {
             width: widthValue,
             height: heightValue,
             length: lengthValue,
-            material: materialValue,
-            additionalDetails: additionalDetailsValue,
             colors: colorsValue
         });
 
@@ -458,7 +454,6 @@ export const listByFilters = async (req: Request, res: Response) => {
             category
             quantity
             sold
-            material
             colors
             weight
             width

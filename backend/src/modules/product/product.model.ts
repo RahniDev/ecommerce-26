@@ -31,12 +31,10 @@ export interface IProduct {
       xl: string;
     };
   }[];
-  material: string;
   weight: number;
   width: number;
   height: number;
   length: number;
-  additionalDetails: string;
   colors: string[];
 }
 
@@ -90,11 +88,6 @@ const productSchema = new Schema<IProductDocument>({
     type: Number, // grams
     required: true
   },
-  material: {
-    type: String,
-    enum: ["Paper", "Canvas", "Other"],
-    default: "Canvas"
-  },
   // cm
   width: Number,
   height: Number,
@@ -104,7 +97,6 @@ const productSchema = new Schema<IProductDocument>({
     enum: PRODUCT_COLOR_HEXES,
     default: [],
   },
-  additionalDetails: String,
 }, { timestamps: true });
 
 export const Product = mongoose.model<IProductDocument>("Product", productSchema);

@@ -44,8 +44,6 @@ const AddProduct: React.FC = () => {
     createdProduct: false,
     createdProductName: "",
     createdProductId: "",
-    additionalDetails: "",
-    material: "",
     colors: [],
   });
 
@@ -58,9 +56,7 @@ const AddProduct: React.FC = () => {
     loading,
     error,
     createdProduct,
-    additionalDetails,
     colors,
-    material
   } = values;
 
   const formData = useRef<FormData | null>(null);
@@ -103,15 +99,6 @@ const AddProduct: React.FC = () => {
           formData.current.set(field, value);
           setValues(prev => ({ ...prev, [field]: value }));
         }
-      };
-
-  const handleSelectChange =
-    (field: ProductFormField) =>
-      (event: SelectChangeEvent<string>) => {
-        if (!formData.current) return;
-        const value = event.target.value;
-        formData.current.set(field, value);
-        setValues(prev => ({ ...prev, [field]: value }));
       };
 
   const handleColorToggle = (hex: string) => {
@@ -170,8 +157,6 @@ const AddProduct: React.FC = () => {
           height: "",
           length: "",
           photos: [],
-          additionalDetails: "",
-          material: "",
           colors: [],
         }));
         setImgPreviews([]);
@@ -279,22 +264,6 @@ const AddProduct: React.FC = () => {
               </Select>
             </FormControl>
 
-            <FormControl fullWidth>
-              <InputLabel>Material</InputLabel>
-              <Select
-                value={material}
-                label="Material"
-                onChange={handleSelectChange("material")}
-              >
-                <MenuItem value="">
-                  <em>Please select</em>
-                </MenuItem>
-                <MenuItem value="Paper">Paper</MenuItem>
-                <MenuItem value="Canvas">Canvas</MenuItem>
-                <MenuItem value="Other">Other</MenuItem>
-              </Select>
-            </FormControl>
-
             <Box>
               <Typography fontWeight={600} sx={{ mb: 1 }}>
                 Colors
@@ -360,15 +329,6 @@ const AddProduct: React.FC = () => {
               type="number"
               value={values.height}
               onChange={handleInputChange("height")}
-              fullWidth
-            />
-
-            <TextField
-              label="Additional Details"
-              value={additionalDetails}
-              onChange={handleInputChange("additionalDetails")}
-              multiline
-              rows={4}
               fullWidth
             />
 

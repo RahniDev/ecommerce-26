@@ -116,11 +116,9 @@ export interface ProductFormBase {
   categories: Category[];
   category: string;
   quantity?: string;
-  material: string;
   colors: string[];
   loading: boolean;
   error: string;
-  additionalDetails?: string;
 }
 
 export interface AddProductValues extends ProductFormBase {

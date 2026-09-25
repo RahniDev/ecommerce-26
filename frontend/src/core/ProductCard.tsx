@@ -44,12 +44,12 @@ const ProductCard: React.FC<CardProps> = ({
                         item={product}
                         url="product"
                         sizes="(max-width: 600px) 100vw, 33vw"
-                        width="100%"
+                        width="80%"
                         showAll={false}
                     />
                 </Box>
                 <CardContent sx={{
-                    width: "100%",
+                    width: "80%",
                     px: 0,
                     pt: 1,
                     pb: 0
