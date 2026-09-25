@@ -6,8 +6,7 @@
     "outDir": "./dist",
     "rootDir": "..",
     "types": [
-      "node",
-      "jest"
+      "node"
     ],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
