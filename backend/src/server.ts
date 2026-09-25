@@ -41,8 +41,13 @@ app.use((req, res, next) => {
   express.json()(req, res, next);
 });
 
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://ecommerce-26-r4u788up5-rahnis-projects.vercel.app'
+];
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: allowedOrigins,
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
