@@ -23,7 +23,21 @@ export const applyLang = (product: any, lang: string) => {
         ? product.name.en || ''
         : product.name || '';
 
-    return { ...product, name, nameEn };
+    const description = typeof product.description === 'object'
+        ? product.description[lang] || product.description.en || ''
+        : product.description || '';
+
+    const descriptionEn = typeof product.description === 'object'
+        ? product.description.en || ''
+        : product.description || '';
+
+    return {
+        ...product,
+        name,
+        nameEn,
+        description,
+        descriptionEn
+    };
 };
 
 export const productById = async (
@@ -163,14 +177,18 @@ export const create = async (req: Request, res: Response) => {
             return res.status(400).json({ error: "All fields are required" });
         }
 
-        const [nameTranslations] = await Promise.all([
-            translateToAll(nameValue),]);
+        const [nameTranslations, descriptionTranslations] = await Promise.all([
+            translateToAll(nameValue),
+            translateToAll(descriptionValue ?? ''),
+        ]);
 
         const product = new Product({
             name: { en: nameValue, ...nameTranslations },
             price: priceValue,
-            description: descriptionValue,
-            category: categoryValue,
+            description: {
+                en: descriptionValue ?? '',
+                ...descriptionTranslations
+            }, category: categoryValue,
             quantity: quantityValue,
             weight: weightValue,
             width: widthValue,
@@ -257,9 +275,26 @@ export const update = async (req: Request, res: Response) => {
                 };
             }
         }
+        if (fields.description) {
+            const descriptionValue = Array.isArray(fields.description)
+                ? fields.description[0]
+                : fields.description;
+
+            if (descriptionValue) {
+                const translations = await translateToAll(descriptionValue);
+
+                product.description = {
+                    en: descriptionValue,
+                    de: translations.de ?? '',
+                    es: translations.es ?? '',
+                    it: translations.it ?? '',
+                    fr: translations.fr ?? ''
+                };
+            }
+        }
 
         const otherFields = Object.entries(fields)
-            .filter(([key]) => key !== 'name')
+            .filter(([key]) => key !== 'name' && key !== 'description')
             .reduce((acc, [key, value]) => {
                 acc[key] = Array.isArray(value) ? value[0] : value;
                 return acc;

@@ -101,9 +101,7 @@ export type ProductFormField =
   | "weight"
   | "width"
   | "height"
-  | "length"
-  | "additionalDetails"
-  | "material";
+  | "length";
 
 export interface ProductFormBase {
   name: string;
@@ -202,9 +200,7 @@ export interface IProduct {
   height?: number;
   length?: number;
   count?: number;
-  material?: string;
   colors?: string[];
-  additionalDetails?: string;
 }
 
 export interface IPriceRange {
@@ -283,7 +279,6 @@ export interface SearchState {
 }
 
 export type FilterState = {
-  material: string[];
   price: number[];
   size: string[];
   colors: string[];
