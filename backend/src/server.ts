@@ -44,10 +44,18 @@ app.use((req, res, next) => {
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://ecommerce-26-r4u788up5-rahnis-projects.vercel.app'
-];
+  process.env.CLIENT_URL
+].filter(Boolean);
+
 app.use(cors({
-  origin: allowedOrigins,
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log('CORS blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
