@@ -203,12 +203,6 @@ export interface IProduct {
   colors?: string[];
 }
 
-export interface IPriceRange {
-  _id: number;
-  name: string;
-  array: number[];
-}
-
 export interface SignInInput {
   email: string;
   password: string;
@@ -339,10 +333,6 @@ export interface ProductImageProps {
   showAll?: boolean;
   lightingMode?: LightingMode;
   onImageClick?: (src: string) => void;
-}
-export interface RadioBoxProps {
-  prices: IPriceRange[];
-  handleFilters: (value: number) => void;
 }
 
 export interface LayoutProps {

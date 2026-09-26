@@ -17,7 +17,7 @@ import { API } from "../config";
 import Search from "./Search";
 
 const DEFAULT_FILTERS: FilterState = {
-    price: [0, 5000],
+    price: [0, 200],
     size: [],
     colors: [],
 };

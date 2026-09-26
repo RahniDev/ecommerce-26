@@ -47,7 +47,7 @@ const Filters = ({ filters, setFilters }: FiltersProps) => {
                 }
                 valueLabelDisplay="auto"
                 min={0}
-                max={5000}
+                max={200}
             />
 
             <Divider sx={{ my: 2 }} />
