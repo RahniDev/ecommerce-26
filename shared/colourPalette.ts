@@ -9,6 +9,10 @@ export const PRODUCT_COLOR_OPTIONS: ProductColor[] = [
         hex: "#FFFFFF"
     },
     {
+        name: "Brown",
+        hex: "#725431"
+    },
+    {
         name: "Black",
         hex: "#000000"
     },
@@ -36,6 +40,10 @@ export const PRODUCT_COLOR_OPTIONS: ProductColor[] = [
     {
         name: "Purple",
         hex: "#955495"
+    },
+     {
+        name: "Turquoise",
+        hex: "#40E0D0"
     },
     {
         name: "Cream",

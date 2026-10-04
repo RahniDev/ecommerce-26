@@ -1,7 +1,8 @@
 {
   "add_to_cart": "Add to Cart",
   "similar_products": "Similar Products",
-  "cart_items_count": "Your cart has {items.length} items",
+  "cart_items_count_one": "Your cart contains {{count}} item",
+  "cart_items_count_other": "Your cart contains {{count}} items",
   "empty_cart": "Your cart is empty",
   "continue_shopping": "Continue shopping",
   "no_products": "No products found",

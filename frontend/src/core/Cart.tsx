@@ -35,9 +35,7 @@ const Cart: React.FC = () => {
     const showItems = (items: CartItem[]) => (
         <Box>
             <Typography variant="h5" gutterBottom>
-                {t(
-                    `Your cart has ${items.length} ${items.length === 1 ? "item" : "items"}`
-                )}
+                {t("cart_items_count", { count: items.length })}
             </Typography>
 
             <Divider sx={{ mb: 2 }} />

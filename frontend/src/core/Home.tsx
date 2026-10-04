@@ -9,7 +9,7 @@ import CollectionSlider from "./CollectionSlider";
 import Layout from "./Layout";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
-
+import heroImg from "../assets/home-bg.jpg";
 
 const Home: React.FC = () => {
   const currentLanguage = useSelector((state: RootState) => state.language.currentLanguage);
@@ -43,10 +43,27 @@ const Home: React.FC = () => {
 
   return (
     <Layout title="" description="">
-      <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mt: 4 }}>
-          <h1>{t("home_title")}</h1>
-          <Button variant="contained" sx={{ mb: 6 }} href="/shop">
+      <Box sx={{
+        width: "100%",
+        minHeight: "500px",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), 
+        url(${heroImg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        borderRadius: 2,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        overflow: "hidden",
+        mb: 8,
+      }}>
+        <Box sx={{ mt: 4 }}>
+          <Typography variant="h1" fontFamily="Chakra Petch" fontWeight="bold" color="white">
+            {t("home_title")}
+          </Typography>
+          <Button variant="contained" sx={{ my: 4 }} href="/shop">
             {t("shop_button")}
           </Button>
         </Box>
@@ -88,7 +105,6 @@ const Home: React.FC = () => {
         </Button>
       </Box>
       <CollectionSlider />
-
     </Layout>
   );
 };

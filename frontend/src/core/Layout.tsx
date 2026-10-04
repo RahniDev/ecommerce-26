@@ -29,8 +29,9 @@ const Layout: React.FC<LayoutProps> = ({
       )}
       {/* Main content */}
       <Container
-        maxWidth="xl"
-        sx={{ flexGrow: 1, py: 4 }}
+        maxWidth={false}
+        disableGutters
+        sx={{ flexGrow: 1}}
         className={className}
       >
         {children}

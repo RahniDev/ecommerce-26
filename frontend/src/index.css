@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 #logo {
@@ -10,21 +12,3 @@ body {
   color: #111;
   letter-spacing: 0.05em;
 }
-
-#hero {
-  background-image: url('./assets/hero-bg.jpg');
-  height: 500px;
-  background-size: cover;
-  background-position: center center;
-}
-
-.swiper-prev,
-.swiper-next {
-  color: #111 !important;
-}
-
-.swiper-prev svg,
-.swiper-next svg {
- font-size: 64px;
-}
-

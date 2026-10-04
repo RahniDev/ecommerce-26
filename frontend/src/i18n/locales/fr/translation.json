@@ -1,7 +1,8 @@
 {
   "add_to_cart": "Ajouter au panier",
   "similar_products": "Produits similaires",
-  "cart_items_count": "Votre panier contient {{count}} article",
+  "cart_items_count_one": "Votre panier contient {{count}} article",
+  "cart_items_count_other": "Votre panier contient {{count}} articles",
   "empty_cart": "Votre panier est vide",
   "continue_shopping": "Continuer vos achats",
   "no_products": "Aucun produit trouvé",
